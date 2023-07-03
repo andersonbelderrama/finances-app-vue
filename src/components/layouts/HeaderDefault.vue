@@ -27,7 +27,7 @@ export default {
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
-      <h1 class="text-xl md:text-2xl font-bold text-violet-600">
+      <h1 class="text-xl md:text-2xl font-bold dark:text-violet-600 text-violet-900">
         Finances<span class="dark:font-light font-normal dark:text-neutral-100 text-neutral-950">App</span>
       </h1>
     </div>
