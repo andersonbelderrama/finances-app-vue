@@ -33,8 +33,8 @@ export default {
 </script>
 
 <template>
-  <div class="dark:bg-neutral-900 dark:text-neutral-100 min-h-screen w-full font-open-sans">
-    <HeaderDefault @toggleSidebar="toggleSidebar" @toggleDarkMode="toggleDarkMode" :darkMode="darkMode" />
+  <div class="dark:bg-neutral-900 bg-neutral-200 dark:text-neutral-100 min-h-screen w-full font-open-sans">
+    <HeaderDefault @toggleSidebar="toggleSidebar()" @toggleDarkMode="toggleDarkMode()" :darkMode="darkMode" />
     <div class="flex relative">
       <SidebarDefault :sidebarVisible="sidebarVisible" />
       <div :class="sidebarVisible ? 'md:ml-0' : 'md:ml-64'" class="w-full transition-transform ease-in-out duration-300">
