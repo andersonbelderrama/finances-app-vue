@@ -8,5 +8,7 @@ import Heading from '../components/Heading.vue';
 <template>
   <Heading title="Movimentações" icon="paid" />
   <CardWTitle title="Filtrar" icon="filter_alt">Filtros</CardWTitle>
-  <CardWTitle title="Extrato" icon="list">Extrato</CardWTitle>
+  <CardWTitle title="Extrato" icon="list">
+    
+  </CardWTitle>
 </template>
