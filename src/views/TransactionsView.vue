@@ -49,6 +49,13 @@ export default {
               descricao="Nota emitida pela AML."
               valor="8500,00"
             />
+            <TransactionItemLista 
+              categoria="Renda"
+              tipo="Transferencia"
+              nome="Investimento N26"
+              descricao="Investimento renda fixa."
+              valor="1000,00"
+            />
           </ul>
           <!-- fim lista movimentações de data especifica -->
         </li>

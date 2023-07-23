@@ -35,6 +35,8 @@ export default {
                 this.iconValue = 'arrow_downward'
             } else if (this.tipo == 'Receita') {
                 this.iconValue = 'arrow_upward'
+            } else if (this.tipo == 'Transferencia') {
+                this.iconValue = 'swap_vert'
             }
             return this.iconValue
         },
@@ -43,6 +45,8 @@ export default {
                 this.colorValue = 'red'
             } else if (this.tipo == 'Receita') {
                 this.colorValue = 'green'
+            } else if (this.tipo == 'Transferencia') {
+                this.colorValue = 'blue'
             }
             return this.colorValue
         }
