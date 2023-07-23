@@ -38,7 +38,7 @@ export default {
     <div class="flex relative">
       <SidebarDefault :sidebarVisible="sidebarVisible" />
       <div :class="sidebarVisible ? 'md:ml-0' : 'md:ml-64'" class="w-full transition-transform ease-in-out duration-300">
-        <main class="lg:container mx-auto md:px-4 p-2 h-screen w-full">
+        <main class="lg:container mx-auto md:px-4 p-2 min-h-screen w-full">
           <RouterView />
         </main>
         <FooterDefault />

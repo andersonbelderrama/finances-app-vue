@@ -25,36 +25,39 @@ export default {
     data() {
         return {
             contentVisible: false,
-            iconValue: '',
-            colorValue: '',
+            iconTipo: '',
+            labelTipo: '',
+            colorIconTipo: '',
         }
     },
     computed: {
-        iconTipo() {
-            if (this.tipo == 'Despesa') {
-                this.iconValue = 'arrow_downward'
-            } else if (this.tipo == 'Receita') {
-                this.iconValue = 'arrow_upward'
-            } else if (this.tipo == 'Transferencia') {
-                this.iconValue = 'swap_vert'
-            }
-            return this.iconValue
-        },
-        colorTipo() {
-            if (this.tipo == 'Despesa') {
-                this.colorValue = 'red'
-            } else if (this.tipo == 'Receita') {
-                this.colorValue = 'green'
-            } else if (this.tipo == 'Transferencia') {
-                this.colorValue = 'blue'
-            }
-            return this.colorValue
+        tipoFormat() {
+            if (this.tipo === 'Despesa') {
+                this.iconTipo = 'remove', 
+                this.colorIconTipo = 'text-red-600'
+                this.labelTipo = 'bg-red-900 text-red-200'
+            } else if (this.tipo === 'Receita') {
+                this.iconTipo = 'add', 
+                this.colorIconTipo = 'text-green-600'
+                this.labelTipo = 'bg-green-900 text-green-200'
+            } else if (this.tipo === 'Transferencia') {
+                this.iconTipo = 'swap_vert', 
+                this.colorIconTipo = 'text-blue-600'
+                this.labelTipo = 'bg-blue-900 text-blue-200'
+            } 
+
+            return {
+                icon: this.iconTipo,
+                colorIcon: this.colorIconTipo,
+                label: this.labelTipo,
+            }      
         }
     },
     methods: {
         hiddenContent() {
             this.contentVisible = !this.contentVisible
-        }
+        },
+
     }
 };
 </script>
@@ -64,12 +67,12 @@ export default {
         <div class="flex justify-between items-center w-full mt-1">
             <div class="flex space-x-2">
                 <div class="rounded-full bg-violet-900 text-violet-200 px-4 py-1 text-xs font-semibold">{{ categoria }}</div>
-                <div :class="'bg-' + colorTipo + '-900 ' + 'text-' + colorTipo + '-200'" class="rounded-full px-4 py-1 text-xs font-semibold">{{ tipo }}</div>
+                <div :class="tipoFormat.label" class="rounded-full px-4 py-1 text-xs font-semibold">{{ tipo }}</div>
             </div>
             <div>
                 <button @click="hiddenContent" :class="contentVisible ? 'dark:bg-neutral-600' : ''"
-                    class="flex rounded-lg p-2 dark:hover:bg-neutral-600"><span
-                        class="material-symbols-outlined">more_vert</span></button>
+                    class="flex rounded-lg p-2 dark:hover:bg-neutral-600 space-x-1"><span
+                        class="material-symbols-outlined">edit_note</span><span class="hidden md:block">Editar</span></button>
             </div>
         </div>
         <div class="flex justify-between p-2 space-x-2">
@@ -77,15 +80,27 @@ export default {
                 <div class="text-sm font-semibold text-neutral-200">{{ nome }}</div>
                 <div class="text-sm font-light dark:text-neutral-400 text-neutral-500">{{ descricao }}</div>
             </div>
-            <div :class="'text-' + colorTipo + '-600 ' + 'dark:text-' + colorTipo + '-400'" class="flex items-center space-x-1 font-semibold text-md min-w-max"><span
-                    class="material-symbols-outlined">{{ iconTipo }}</span><span>R$ {{ valor }}</span></div>
+            <div class="flex items-center space-x-1 font-semibold text-md min-w-max">
+                <span :class="tipoFormat.colorIcon" class="material-symbols-outlined font-black">{{ tipoFormat.icon }}</span>
+                <span>R$ {{ valor }}</span>
+            </div>
         </div>
         <transition name="slide">
-            <div v-if="contentVisible" class="flex flex-row-reverse space-x-reverse space-x-4 mt-2 py-2">
-                <button class="flex items-center justify-center bg-red-600 rounded-lg p-2 space-x-1"><span
-                        class="material-symbols-outlined">delete</span><span>Deletar</span></button>
-                <button class="flex items-center justify-center bg-violet-900 rounded-lg p-2 space-x-1"><span
-                        class="material-symbols-outlined">edit</span><span>Editar</span></button>
+            <div v-if="contentVisible" class="flex flex-col mt-2 py-2">
+                <div class="">
+                    <div class="">
+                        <div class="relative">
+                            <label class="absolute left-4 -top-2 text-xs font-semibold dark:text-neutral-500 dark:bg-neutral-700 px-1 z-10" for="nome">Nome</label>
+                            <input id="nome" type="text" class="form-input w-full px-5 py-2 rounded-full dark:bg-neutral-700 dark:text-neutral-400">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row-reverse space-x-reverse space-x-4 mt-2 py-2">
+                    <button class="flex items-center justify-center bg-red-600 rounded-lg p-2 space-x-1"><span
+                            class="material-symbols-outlined">delete</span><span>Deletar</span></button>
+                    <button class="flex items-center justify-center bg-violet-900 rounded-lg p-2 space-x-1"><span
+                            class="material-symbols-outlined">save</span><span>Salvar</span></button>
+                </div>
             </div>
         </transition>
     </li>
