@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="dark:bg-neutral-800  bg-neutral-100 rounded-xl shadow-lg border-t-2 border-violet-900 mb-4 mt-2">
+  <div class="dark:bg-neutral-800 bg-neutral-100 shadow-lg border-t-2 border-violet-900 mb-4 mt-2" :class="contentVisible ? 'rounded-xl' : 'rounded-t-xl'">
     <div class=" p-2 flex justify-between items-center">
       <div class="flex space-x-1">
         <span class="material-symbols-outlined">{{ icon }}</span>
