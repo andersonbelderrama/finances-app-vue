@@ -1,71 +1,3 @@
-<script>
-import FormInput from './FormInput.vue';
-export default {
-    components: {
-        FormInput
-    },
-    props: {
-        categoria: {
-            type: String,
-            required: true
-        },
-        tipo: {
-            type: String,
-            required: true
-        },
-        nome: {
-            type: String,
-            required: true
-        },
-        descricao: {
-            type: String,
-            required: false
-        },
-        valor: {
-            type: String,
-            required: true
-        }
-    },
-    data() {
-        return {
-            contentVisible: false,
-            iconTipo: '',
-            labelTipo: '',
-            colorIconTipo: '',
-        }
-    },
-    computed: {
-        tipoFormat() {
-            if (this.tipo === 'Despesa') {
-                this.iconTipo = 'remove', 
-                this.colorIconTipo = 'text-red-600'
-                this.labelTipo = 'bg-red-600 text-red-100'
-            } else if (this.tipo === 'Receita') {
-                this.iconTipo = 'add', 
-                this.colorIconTipo = 'text-green-600'
-                this.labelTipo = 'bg-green-600 text-green-100'
-            } else if (this.tipo === 'Transferencia') {
-                this.iconTipo = 'swap_vert', 
-                this.colorIconTipo = 'text-blue-600'
-                this.labelTipo = 'bg-blue-600 text-blue-100'
-            } 
-
-            return {
-                icon: this.iconTipo,
-                colorIcon: this.colorIconTipo,
-                label: this.labelTipo,
-            }      
-        },
-    },
-    methods: {
-        hiddenContent() {
-            this.contentVisible = !this.contentVisible
-        },
-
-    }
-};
-</script>
-
 <template>
     <li class="flex flex-col bg-neutral-200 dark:bg-neutral-700 p-2 rounded-lg">
         <div class="flex justify-between items-center w-full mt-1">
@@ -98,17 +30,119 @@ export default {
                         <FormInput 
                             label="Valor"
                         />
+                        <FormSelect 
+                            label="Categoria"
+                            :options="categories" 
+                            @selected="onCategorySelected"
+                            :hasError=false
+                            
+                        />
+                        <FormRadioGroup 
+                            v-model="selectedType" 
+                            :options="types" 
+                        />
+                        <FormSliderButton />
+                        <p class="text-white">Opção selecionada: {{ selectedType }}</p>
                     </div>
                 <div class="flex flex-row-reverse space-x-reverse space-x-4 mt-2 py-2">
                     <button class="flex items-center justify-center bg-red-600 rounded-lg p-2 space-x-1"><span
-                            class="material-symbols-outlined">delete</span><span>Deletar</span></button>
-                    <button class="flex items-center justify-center bg-violet-900 rounded-lg p-2 space-x-1"><span
-                            class="material-symbols-outlined">save</span><span>Salvar</span></button>
+                            class="material-symbols-outlined">delete</span><span></span></button>
+                    <button class="flex items-center justify-center bg-green-600 rounded-lg p-2 space-x-1"><span
+                            class="material-symbols-outlined">save</span><span></span></button>
                 </div>
             </div>
         </transition>
     </li>
 </template>
+
+<script>
+import FormInput from './FormInput.vue';
+import FormSelect from './FormSelect.vue';
+import FormRadioGroup from './FormRadioGroup.vue';
+import FormSliderButton from './FormSliderButton.vue';
+export default {
+    components: {
+        FormInput,
+        FormSelect,
+        FormRadioGroup,
+        FormSliderButton,
+    },
+    props: {
+        categoria: {
+            type: String,
+            required: true
+        },
+        tipo: {
+            type: String,
+            required: true
+        },
+        nome: {
+            type: String,
+            required: true
+        },
+        descricao: {
+            type: String,
+            required: false
+        },
+        valor: {
+            type: String,
+            required: true
+        }
+    },
+    data() {
+        return {
+            contentVisible: false,
+            iconTipo: '',
+            labelTipo: '',
+            colorIconTipo: '',
+            categories: [
+                "Categoria 1",
+                "Categoria 2",
+                "Categoria 3",
+            ],
+            types: [
+                'receita', 
+                'despesa', 
+                'transferencia',
+            ],
+            selectedType: '',
+        }
+    },
+    computed: {
+        tipoFormat() {
+            if (this.tipo === 'Despesa') {
+                this.iconTipo = 'remove', 
+                this.colorIconTipo = 'text-red-600'
+                this.labelTipo = 'bg-red-600 text-red-100'
+            } else if (this.tipo === 'Receita') {
+                this.iconTipo = 'add', 
+                this.colorIconTipo = 'text-green-600'
+                this.labelTipo = 'bg-green-600 text-green-100'
+            } else if (this.tipo === 'Transferencia') {
+                this.iconTipo = 'swap_vert', 
+                this.colorIconTipo = 'text-blue-600'
+                this.labelTipo = 'bg-blue-600 text-blue-100'
+            } 
+
+            return {
+                icon: this.iconTipo,
+                colorIcon: this.colorIconTipo,
+                label: this.labelTipo,
+            }      
+        },
+    },
+    methods: {
+        hiddenContent() {
+            this.contentVisible = !this.contentVisible
+        },
+        onCategorySelected(option) {
+            console.log("Selected:", option);
+            // Faça o que quiser com a opção selecionada
+        },
+
+    }
+};
+</script>
 
 <style>
 .slide-enter-active,
